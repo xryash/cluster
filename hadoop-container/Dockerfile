@@ -35,20 +35,17 @@ ENV JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 COPY init_confs.py /init_confs.py
 COPY hadoop-cluster.ini /hadoop-cluster.ini
 
-RUN python3 init_confs.py
-
 # add envs to hadoop-env.sh
 COPY init_hadoop_envs.py /init_hadoop_envs.py
 
-RUN chmod a+x -R $HADOOP_HOME \
-        && python3 init_hadoop_envs.py --envs JAVA_HOME HADOOP_HOME \
-                                       --hadoop_env_path ${HADOOP_HOME}/etc/hadoop/hadoop-env.sh
-
+RUN chmod a+x -R $HADOOP_HOME
 
 RUN ssh-keygen -t rsa -P '' -f /root/.ssh/id_rsa \
         && cat ~/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys \
         && chmod 0600 /root/.ssh/authorized_keys
 
-RUN service ssh start
+COPY entrypoint.sh /entrypoint.sh
 
-RUN $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+RUN chmod a+x /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
