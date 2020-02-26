@@ -8,7 +8,7 @@ RUN apt-get update \
 ENV HADOOP_VERSION=3.2.1 \
     HADOOP_CONF_DIR=/etc/hadoop \
     HADOOP_HOME=/opt/hadoop \
-    HADOOP_OPTS="$HADOOP_OPTS -Djava.library.path=$HADOOP_HOME/lib/native"
+    HADOOP_OPTS="$HADOOP_OPTS-Djava.library.path=$HADOOP_HOME/lib/native"
 
 ENV HDFS_NAMENODE_USER=root \
     HDFS_DATANODE_USER=root \
@@ -48,4 +48,4 @@ COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod a+x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/entrypoint.sh"]
