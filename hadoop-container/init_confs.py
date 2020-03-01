@@ -49,22 +49,19 @@ def create_xml_configuration(properties: dict, path: str):
     # write xml tree to file
     try:
         xml.ElementTree(root).write(path)
-
+        print('success')
     except Exception as err:
         raise err
 
-
-
-
 def main():
-
-    config_path = os.getenv('CONFIGURATION_INI_PATH', 'hadoop-cluster.ini')
+    
+    config_path = os.getenv('CONFIGURATION_INI_PATH', '/confs.ini')
 
     conf_dir = os.getenv('HADOOP_CONF_DIR', 'confs')
     
     config = configparser.ConfigParser()
 
-    config.read(config_path, encoding='utf-8')
+    config.read(config_path)
 
     config = dict(config)
     del config['DEFAULT']

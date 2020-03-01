@@ -15,5 +15,5 @@ docker build -t $HADOOP_BASE_IMAGE hadoop-container/
 
 docker build --build-arg HADOOP_BASE_IMAGE=${HADOOP_BASE_IMAGE} -t $HADOOP_NAMENODE_IMAGE hadoop-namenode/
 
-docker build --build-arg HADOOP_BASE_IMAGE=${HADOOP_BASE_IMAGE} -t $HADOOP_DATANODE_IMAGE hadoop-datanode/
+#docker build --build-arg HADOOP_BASE_IMAGE=${HADOOP_BASE_IMAGE} -t $HADOOP_DATANODE_IMAGE hadoop-datanode/
 
